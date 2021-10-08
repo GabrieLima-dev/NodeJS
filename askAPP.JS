@@ -5,3 +5,13 @@ const questions = [
     "Por qual motivos essas tarefas não foram realizadas hoje?",
     "O que devo fazer amanhã para que todas as tarefas planejadas devam ser realizadas?"
 ]
+
+const ask = (index = 0) => {
+    process.stdout.write(questions[index] + "\n")
+}
+
+ask()
+
+process.stdin.on("data", data => {
+    process.stdout.write(data.toString().trim() + "\n")
+})
