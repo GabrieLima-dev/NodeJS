@@ -1,4 +1,5 @@
 const questions = [
+    "Olá qual o seu nome?",
     "Quais as tarefas foram planejadas para o dia de hoje?",
     "Quais tarefas conseguiu realizar hoje?",
     "Quais tarefas não foram realizadas?",
@@ -12,6 +13,39 @@ const ask = (index = 0) => {
 
 ask()
 
+const answers = []
 process.stdin.on("data", data => {
-    process.stdout.write(data.toString().trim() + "\n")
+    answers.push(data.toString().trim() + "\n")
+    if (answers.length < questions.length){
+        ask(answers.length)
+    } else{
+        process.exit()
+    }  
+})
+
+process.on('exit', () => {
+ console.log(`
+ *********************************************************************** 
+            Olá ${answers[0]}
+
+    Hoje foram planejadas essas tarefas:
+    ${answers[1]}
+
+    As tarefas realizadas foram:
+    ${answers[2]}
+
+    As tarefas não realizadas foram:
+    ${answers[3]}
+
+    O motivo da não realização das tarefas foram:
+    ${answers[4]}
+
+    O que deve ser feito para que amanhã consiga realizar todas as tarefas:
+    ${answers[5]}
+
+    Erros são provas de que você está tentando.
+    Não desista... 
+    
+*********************************************************************** 
+`)
 })
